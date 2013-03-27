@@ -106,20 +106,23 @@ module.exports = function(config, mongoose, nodemailer) {
     });
   };
 
-  var addContact = function(account, addcontact) {
-    contact = {
-      name: addcontact.name,
-      accountId: addcontact._id,
-      added: new Date(),
-      updated: new Date()
-    };
-    account.contacts.push(contact);
+  var addContact = function( account, addcontact) { 
+    contact = { 
+        name: {
+            first: addcontact.name.first,
+            last: addcontact.name.last
+        }, 
+        accountId: addcontact._id, 
+        added: new Date(), 
+        updated: new Date() 
+    }; 
+    account.contacts.push( contact); 
 
-    account.save(function (err) {
-      if (err) {
-        console.log('Error saving account: ' + err);
-      }
-    });
+    account.save( function (err) { 
+        if (err) { 
+            console.log(' Error saving account: ' + err); 
+        } 
+    }); 
   };
 
   var removeContact = function(account, contactId) {
